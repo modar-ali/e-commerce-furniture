@@ -1,0 +1,189 @@
+/* CSS reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  caret-color: var(--primary-clr-400);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+/* end CSS reset */
+
+body {
+  font-family: var(--ff);
+  font-weight: var(--fw-regular);
+  font-size: 14px;
+}
+
+.container {
+  padding: 0 var(--container-padding);
+  margin-inline: auto;
+}
+
+/* small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* froms styling */
+
+.login-page,
+.register-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-page > *,
+.register-page > * {
+  flex-basis: 100%;
+}
+
+.register-side,
+.login-side {
+  display: grid;
+  gap: 3.125rem;
+}
+
+.register-side h2,
+.login-side h2 {
+  font-size: var(--fs-30px);
+  color: var(--primary-font-clr-100);
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+
+.register-side p,
+.login-side p {
+  color: var(--secondary-clr-300);
+  letter-spacing: 1px;
+}
+
+.register-side .register-btn,
+.login-side .login-btn {
+  cursor: pointer;
+  width: 200px;
+  border: none;
+  border-radius: 1.875rem;
+  padding: 0.625rem 1.25rem;
+  font-size: var(--fs-16px);
+  font-weight: var(--fw-bold);
+  color: var(--primary-font-clr-1000);
+  background-color: var(--primary-clr-400);
+}
+
+.login-side .login-form,
+.register-side .register-form {
+  display: grid;
+  gap: 3.125rem;
+}
+
+.register-form > *,
+.login-form > * {
+  display: grid;
+  gap: 0.3125rem;
+}
+
+.login-side .login-form input,
+.register-side .register-form input {
+  padding: 0.625rem 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--secondary-clr-700);
+}
+
+.register-form .password,
+.login-form > * .password {
+  position: relative;
+}
+
+.register-form .password > *:first-child,
+.login-form > * .password > *:first-child {
+  width: 100%;
+}
+
+.password .toggle {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 1.125rem;
+  color: var(--secondary-clr-500);
+}
+
+.submit-login-btn,
+.submit-register-btn {
+  cursor: pointer;
+  border: none;
+  padding-block: 0.625rem;
+  border-radius: 1.5rem;
+  background-color: var(--primary-clr-400);
+  color: var(--primary-font-clr-1000);
+  font-size: var(--fs-16px);
+  font-weight: var(--fw-bold);
+}
+
+.register-form > * .errMsg,
+.login-form > * .errMsg {
+  color: hsl(0, 100%, 50%);
+  font-size: 0.75rem;
+}

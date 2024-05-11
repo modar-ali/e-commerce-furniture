@@ -1,0 +1,34 @@
+@import "./base.css";
+
+:root {
+  --primary-clr-400: #1f5298;
+
+  /* for background */
+  --primary-clr-1000: hsl(0, 0%, 100%);
+  --primary-font-clr-1000: hsl(0, 0%, 100%);
+  --primary-font-clr-100: hsl(0, 0%, 7%);
+  /* end */
+
+  --secondary-clr-100: hsl(0, 0%, 7%);
+  --secondary-clr-200: hsl(0, 1%, 16%);
+  --secondary-clr-300: hsl(0, 2%, 32%);
+  --secondary-clr-500: hsl(0, 2%, 50%);
+  --secondary-clr-700: hsl(0, 0%, 75%);
+  --secondary-clr-900: hsl(0, 0%, 95%);
+
+  --container-padding: 15px;
+
+  --ff: "Roboto", sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  --fs-10px: 0.625rem;
+  --fs-16px: 1rem;
+  --fs-18px: 1.125rem;
+  --fs-20px: 1.25rem;
+  --fs-30px: 1.875rem;
+  --fs-36px: 2.25rem;
+}
