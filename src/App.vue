@@ -5,8 +5,8 @@
   <div class="main-content" v-else>
     <header>
       <Navbar />
-      <TabBar />
     </header>
+    <TabBar />
     <div class="body">
       <router-view />
     </div>
@@ -30,6 +30,7 @@ const isLoading = computed(() => {
 <style scoped>
 header {
   background-color: var(--primary-clr-1000);
+  padding-bottom: var(--section-padding);
 }
 
 .body {

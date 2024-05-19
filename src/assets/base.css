@@ -187,3 +187,17 @@ body {
   color: hsl(0, 100%, 50%);
   font-size: 0.75rem;
 }
+
+/* Scrollbar Styling */
+
+::-webkit-scrollbar {
+  width: 0.9325rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--secondary-clr-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-clr-400);
+}

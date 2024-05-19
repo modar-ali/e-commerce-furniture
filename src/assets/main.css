@@ -1,7 +1,7 @@
 @import "./base.css";
 
 :root {
-  --primary-clr-400: #1f5298;
+  --primary-clr-400: hsl(215, 66%, 36%);
 
   /* for background */
   --primary-clr-1000: hsl(0, 0%, 100%);
@@ -17,6 +17,7 @@
   --secondary-clr-900: hsl(0, 0%, 95%);
 
   --container-padding: 15px;
+  --section-padding: 10px;
 
   --ff: "Roboto", sans-serif;
 
@@ -26,6 +27,8 @@
   --fw-black: 900;
 
   --fs-10px: 0.625rem;
+  --fs-12px: 0.75rem;
+  --fs-14px: 0.875rem;
   --fs-16px: 1rem;
   --fs-18px: 1.125rem;
   --fs-20px: 1.25rem;

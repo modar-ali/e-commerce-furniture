@@ -2,7 +2,7 @@
   <form>
     <div class="search align">
       <span class="search-icon material-symbols-outlined">search</span>
-      <input class="search-input" type="search" placeholder="What are you looking for ?" />
+      <input class="search-input" type="search" placeholder="Search..." />
     </div>
   </form>
 </template>
@@ -23,6 +23,13 @@
   transition: background 0.25s;
 }
 
+@media (max-width: 767px) {
+  .search {
+    gap: 0.1875rem;
+    padding: 0.3125rem 0.4375rem;
+  }
+}
+
 .search:focus-within {
   box-shadow: 0 0 2px hsla(0, 0%, 0%, 0.75);
 }
@@ -37,8 +44,20 @@
   background-color: transparent;
 }
 
+@media (max-width: 767px) {
+  .search-input {
+    font-size: 14px;
+  }
+}
+
 .search-input::placeholder,
 .search-icon {
   color: hsla(0, 0%, 0%, 0.25);
+}
+
+@media (max-width: 767px) {
+  .search-icon {
+    font-size: 20px;
+  }
 }
 </style>

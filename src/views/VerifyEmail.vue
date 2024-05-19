@@ -52,7 +52,7 @@
           @keyup="moveFocuse($event, n)"
         />
       </div>
-      <button class="verify-btn">Verify email</button>
+      <button class="verify-btn" :class="{'not-allowed': status === 'loading'}" :disabled="status === 'loading'">Verify email</button>
     </form>
     <p class="verify-again">
       Didn't recevie an email?
@@ -78,6 +78,7 @@ const verifyResponse = ref({
   status: "",
   message: "",
 })
+const status = ref("")
 
 // Methods :
 const moveFocuse = (event, n) => {
@@ -103,6 +104,7 @@ const getUser = computed(() => {
 })
 
 const sendCode = async () => {
+  status.value = "loading"
   try {
     const response = await api.post("api/auth/verify-user-email", {
       code: Number(code.value.join("")),
@@ -110,6 +112,7 @@ const sendCode = async () => {
     })
     verifyResponse.value.status = response.data.status
     verifyResponse.value.message = response.data.message
+    status.value = "success"
   } catch (err) {
     errorMsg.value = err.message
   }
@@ -161,7 +164,7 @@ const hideDialog = () => {
   position: absolute;
   top: -50%;
   left: 50%;
-  transform: translate(-50%, 90%);
+  transform: translate(-50%, 100%);
   background-color: var(--primary-clr-400);
   width: 50px;
   height: 50px;
@@ -280,5 +283,10 @@ const hideDialog = () => {
   cursor: pointer;
   text-align: center;
   color: var(--secondary-clr-500);
+}
+
+.not-allowed {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 </style>

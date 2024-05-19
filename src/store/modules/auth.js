@@ -31,6 +31,7 @@ export const auth = {
         const user = response.data.user
         localStorage.setItem("accessToken", token)
         context.commit("authSuccess", { user, token })
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`
         context.commit("setIsLoading", false, { root: true })
       } catch (error) {
         context.commit("authError")
@@ -44,6 +45,7 @@ export const auth = {
         const token = response.data.access_token
         const user = response.data.user
         localStorage.setItem("accessToken", token)
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`
         context.commit("authSuccess", { user, token })
         context.commit("setIsLoading", false, { root: true })
       } catch (error) {

@@ -9,9 +9,9 @@
         <li class="center">
           <span class="icone material-symbols-outlined">shopping_cart</span>
         </li>
-        <li class="center">
+        <!-- <li class="center">
           <span class="icone material-symbols-outlined">account_circle</span>
-        </li>
+        </li> -->
         <li class="center" v-if="!isLoggedIn">
           <router-link :to="{ name: 'login' }">
             <div class="login align">
@@ -20,7 +20,12 @@
             </div>
           </router-link>
         </li>
-        <li class="align" @click="handleLogout">logout</li>
+        <li class="align" @click="handleLogout" v-if="isLoggedIn">
+          <div class="logout">
+            <span>Logout</span>
+            <span class="material-symbols-outlined">logout</span>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
@@ -63,8 +68,14 @@ const handleLogout = async () => {
 }
 
 .nav_logo_search {
-  flex-basis: 100%;
-  gap: 3rem;
+  flex-basis: 80%;
+  gap: 1.875rem;
+}
+
+@media (max-width: 767px) {
+  .nav_logo_search {
+    gap: 0.625rem;
+  }
 }
 
 .logo {
@@ -79,7 +90,7 @@ const handleLogout = async () => {
 }
 
 .nav_icons {
-  flex-basis: 35%;
+  flex-basis: auto;
   justify-content: flex-end;
 }
 
@@ -89,18 +100,31 @@ const handleLogout = async () => {
   min-height: 70px;
 }
 
+@media (max-width: 767px) {
+  .nav_icons > * {
+    padding-inline: 0.3125rem;
+  }
+}
+
 .icone {
   color: var(--primary-font-clr-100);
-  padding: 0.4125rem;
-  border-radius: 50%;
   transition: background-color 0.25s;
 }
 
-.icone:hover {
-  background-color: var(--secondary-clr-900);
+@media (max-width: 767px) {
+  .icone {
+    font-size: 20px;
+  }
 }
 
-.login {
+.icone:hover {
+  color: var(--primary-clr-400);
+}
+
+.login,
+.logout {
+  display: flex;
+  align-items: center;
   color: var(--primary-font-clr-1000);
   background-color: var(--primary-clr-400);
   padding: 0.3125rem 0.625rem;
@@ -108,8 +132,28 @@ const handleLogout = async () => {
   gap: 0.3125rem;
 }
 
-.login span:first-child {
+.login span:first-child,
+.logout span:first-child {
   font-size: var(--fs-16px);
   font-weight: var(--fw-medium);
+}
+
+@media (max-width: 767px) {
+  .login span:first-child,
+  .logout span:first-child {
+    font-size: 14px;
+  }
+}
+
+.login span:last-child,
+.logout span:last-child {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .login span:last-child,
+  .logout span:last-child {
+    font-size: 20px;
+  }
 }
 </style>
