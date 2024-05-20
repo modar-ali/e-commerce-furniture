@@ -33,7 +33,6 @@ const activeBar = ref("catagories")
 .tab-bar {
   display: flex;
   gap: 2.5rem;
-  padding-bottom: 0.625rem;
 }
 
 .tab-bar > * {

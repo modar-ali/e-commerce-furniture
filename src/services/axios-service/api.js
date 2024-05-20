@@ -1,12 +1,13 @@
 import axios from "axios"
 
 const api = axios.create({
-  baseURL: "https://asp-enjoyed-bonefish.ngrok-free.app/",
-  headers: {
-    common: {
-      "ngrok-skip-browser-warning": "234334",
-    },
-  },
+  baseURL: "https://jamfurniture.000webhostapp.com/",
+  // baseURL: "https://asp-enjoyed-bonefish.ngrok-free.app/",
+  // headers: {
+  //   common: {
+  //     "ngrok-skip-browser-warning": "234334",
+  //   },
+  // },
 })
 
 const token = localStorage.getItem("accessToken")

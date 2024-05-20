@@ -51,7 +51,8 @@ import { useStore } from "vuex"
 const store = useStore()
 
 // Define Data :
-const baseURL = ref("https://asp-enjoyed-bonefish.ngrok-free.app")
+const baseURL = ref("https://jamfurniture.000webhostapp.com")
+// const baseURL = ref("https://asp-enjoyed-bonefish.ngrok-free.app")
 const photos = computed(() => {
   return store.getters["scroller/getCategoriesPhotos"]
 })
@@ -89,6 +90,7 @@ onMounted(() => {
     --mob-spacer: 0.625rem;
     gap: var(--mob-gap);
     grid-auto-columns: 27%;
+    padding: 0.625rem 0;
   }
 }
 
