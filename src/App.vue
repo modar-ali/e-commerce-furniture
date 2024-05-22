@@ -6,16 +6,12 @@
     <header>
       <Navbar />
     </header>
-    <TabBar />
-    <div class="body">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
 <script setup>
 import Navbar from "./components/Navbar.vue"
-import TabBar from "./components/TabBar.vue"
 import LoadingAnimation from "./components/LoadingAnimation.vue"
 import { useStore } from "vuex"
 import { computed } from "vue"
@@ -29,14 +25,6 @@ const isLoading = computed(() => {
 
 <style scoped>
 header {
-  background-color: var(--primary-clr-1000);
-  padding-bottom: var(--section-padding);
-}
-
-.body {
-  min-height: calc(100vh - 70px);
-  display: grid;
-  place-content: center;
   background-color: var(--primary-clr-1000);
 }
 </style>

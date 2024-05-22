@@ -63,6 +63,13 @@ body {
   margin-inline: auto;
 }
 
+.page-center {
+  min-height: calc(100vh - 70px);
+  display: grid;
+  place-content: center;
+  background-color: var(--primary-clr-1000);
+}
+
 /* small */
 @media (min-width: 768px) {
   .container {

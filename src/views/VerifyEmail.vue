@@ -1,63 +1,72 @@
 <template>
-  <div
-    class="verify-dialog"
-    @click="goBackHome"
-    v-if="verifyResponse.status === 'success'"
-  >
-    <div class="dialog-content">
-      <div class="success-icon">
-        <span class="material-symbols-outlined">verified</span>
+  <div class="page-center">
+      <div
+        class="verify-dialog"
+        @click="goBackHome"
+        v-if="verifyResponse.status === 'success'"
+      >
+        <div class="dialog-content">
+          <div class="success-icon">
+            <span class="material-symbols-outlined">verified</span>
+          </div>
+          <div class="success-text">
+            <p class="success-message">{{ verifyResponse.message }}</p>
+            <p class="close">Click anywhere to continue</p>
+          </div>
+        </div>
       </div>
-      <div class="success-text">
-        <p class="success-message">{{ verifyResponse.message }}</p>
-        <p class="close">Click anywhere to continue</p>
+      <div
+        class="verify-dialog"
+        @click="hideDialog"
+        v-if="verifyResponse.status === 'failed'"
+      >
+        <div class="dialog-content">
+          <div class="failed-icon">
+            <span class="material-symbols-outlined">release_alert</span>
+          </div>
+          <div class="failed-text">
+            <p class="failed-message">{{ verifyResponse.message }}</p>
+            <p class="close">Click anywhere to continue and try again</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div
-    class="verify-dialog"
-    @click="hideDialog"
-    v-if="verifyResponse.status === 'failed'"
-  >
-    <div class="dialog-content">
-      <div class="failed-icon">
-        <span class="material-symbols-outlined">release_alert</span>
+      <div class="verify">
+        <div class="verify-icon">
+          <span class="material-symbols-outlined">verified_user</span>
+        </div>
+        <h2 class="verify-title">Verify it's you.</h2>
+        <p class="verify-text">
+          We sent verification code to
+          <span class="bold">{{ getUser.email }}</span
+          ><br />
+          Please check your inbox and enter the code below.
+        </p>
+        <span class="verify-note">6 - digits code</span>
+        <form @submit.prevent="sendCode" class="verify-form">
+          <div class="verify-inputs">
+            <input
+              v-for="n of code.length"
+              :key="n"
+              type="text"
+              min="0"
+              max="9"
+              v-model="code[n - 1]"
+              @keyup="moveFocuse($event, n)"
+            />
+          </div>
+          <button
+            class="verify-btn"
+            :class="{ 'not-allowed': status === 'loading' }"
+            :disabled="status === 'loading'"
+          >
+            Verify email
+          </button>
+        </form>
+        <p class="verify-again">
+          Didn't recevie an email?
+          <span @click="resendCode" class="bold">Send it again.</span>
+        </p>
       </div>
-      <div class="failed-text">
-        <p class="failed-message">{{ verifyResponse.message }}</p>
-        <p class="close">Click anywhere to continue and try again</p>
-      </div>
-    </div>
-  </div>
-  <div class="verify">
-    <div class="verify-icon">
-      <span class="material-symbols-outlined">verified_user</span>
-    </div>
-    <h2 class="verify-title">Verify it's you.</h2>
-    <p class="verify-text">
-      We sent verification code to <span class="bold">{{ getUser.email }}</span
-      ><br />
-      Please check your inbox and enter the code below.
-    </p>
-    <span class="verify-note">6 - digits code</span>
-    <form @submit.prevent="sendCode" class="verify-form">
-      <div class="verify-inputs">
-        <input
-          v-for="n of code.length"
-          :key="n"
-          type="text"
-          min="0"
-          max="9"
-          v-model="code[n - 1]"
-          @keyup="moveFocuse($event, n)"
-        />
-      </div>
-      <button class="verify-btn" :class="{'not-allowed': status === 'loading'}" :disabled="status === 'loading'">Verify email</button>
-    </form>
-    <p class="verify-again">
-      Didn't recevie an email?
-      <span @click="resendCode" class="bold">Send it again.</span>
-    </p>
   </div>
 </template>
 

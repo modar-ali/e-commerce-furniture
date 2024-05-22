@@ -1,97 +1,98 @@
 <template>
-  <div class="container">
-    <div class="register-page">
-      <div class="login-side">
-        <h2>Create account</h2>
-        <p>Already have an account ?</p>
-        <button @click="handleClick" class="login-btn">Login</button>
-      </div>
-      <div class="register-side">
-        <form class="register-form" @submit.prevent="handleRegister">
-          <div class="field">
-            <input type="text" placeholder="Name" v-model="registerData.name" />
-            <span
-              class="errMsg"
-              v-for="error of v$.name.$errors"
-              :key="error.$uid"
-              >{{ error.$message }}</span
-            >
-          </div>
-          <div class="field">
-            <input
-              type="text"
-              placeholder="Email"
-              v-model="registerData.email"
-            />
-            <span
-              class="errMsg"
-              v-for="error of v$.email.$errors"
-              :key="error.$uid"
-              >{{ error.$message }}</span
-            >
-          </div>
-          <div class="field">
-            <div class="password">
+  <div class="page-center">
+    <div class="container">
+      <div class="register-page">
+        <div class="login-side">
+          <h2>Create account</h2>
+          <p>Already have an account ?</p>
+          <button @click="handleClick" class="login-btn">Login</button>
+        </div>
+        <div class="register-side">
+          <form class="register-form" @submit.prevent="handleRegister">
+            <div class="field">
               <input
-                :type="passwordVisible ? 'text' : 'password'"
-                placeholder="Password"
-                v-model="registerData.password"
+                type="text"
+                placeholder="Name"
+                v-model="registerData.name"
               />
               <span
-                @click="toggleVisible"
-                v-if="!passwordVisible"
-                class="toggle material-symbols-outlined"
-                >visibility</span
+                class="errMsg"
+                v-for="error of v$.name.$errors"
+                :key="error.$uid"
+                >{{ error.$message }}</span
               >
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                placeholder="Email"
+                v-model="registerData.email"
+              />
               <span
-                @click="toggleVisible"
-                v-if="passwordVisible"
-                class="toggle material-symbols-outlined"
+                class="errMsg"
+                v-for="error of v$.email.$errors"
+                :key="error.$uid"
+                >{{ error.$message }}</span
               >
-                visibility_off
-              </span>
             </div>
-            <span
-              class="errMsg"
-              v-for="error of v$.password.$errors"
-              :key="error.$uid"
-              >{{ error.$message }}</span
-            >
-          </div>
-          <div class="field">
-            <input
-              type="password"
-              placeholder="Confirme password"
-              v-model="registerData.password_confirmation"
-            />
-            <span
-              class="errMsg"
-              v-for="error of v$.password_confirmation.$errors"
-              :key="error.$uid"
-              >{{ error.$message }}</span
-            >
-          </div>
-          <div class="field">
-            <div class="privacy-policy">
-              <input type="checkbox" v-model="registerData.terms" />
-              <label class="privacy-label">
-                I have read and understood the <span>privacy policy.</span>
-              </label>
+            <div class="field">
+              <div class="password">
+                <input
+                  :type="passwordVisible ? 'text' : 'password'"
+                  placeholder="Password"
+                  v-model="registerData.password"
+                />
+                <span
+                  @click="toggleVisible"
+                  v-if="!passwordVisible"
+                  class="toggle material-symbols-outlined"
+                  >visibility</span
+                >
+                <span
+                  @click="toggleVisible"
+                  v-if="passwordVisible"
+                  class="toggle material-symbols-outlined"
+                >
+                  visibility_off
+                </span>
+              </div>
+              <span
+                class="errMsg"
+                v-for="error of v$.password.$errors"
+                :key="error.$uid"
+                >{{ error.$message }}</span
+              >
             </div>
-            <span
-              class="errMsg"
-              v-for="error of v$.terms.$errors"
-              :key="error.$uid"
-              >{{ error.$message }}</span
-            >
-          </div>
-          <button
-            class="submit-register-btn"
-            
-          >
-            Register
-          </button>
-        </form>
+            <div class="field">
+              <input
+                type="password"
+                placeholder="Confirme password"
+                v-model="registerData.password_confirmation"
+              />
+              <span
+                class="errMsg"
+                v-for="error of v$.password_confirmation.$errors"
+                :key="error.$uid"
+                >{{ error.$message }}</span
+              >
+            </div>
+            <div class="field">
+              <div class="privacy-policy">
+                <input type="checkbox" v-model="registerData.terms" />
+                <label class="privacy-label">
+                  I have read and understood the <span>privacy policy.</span>
+                </label>
+              </div>
+              <span
+                class="errMsg"
+                v-for="error of v$.terms.$errors"
+                :key="error.$uid"
+                >{{ error.$message }}</span
+              >
+            </div>
+            <button class="submit-register-btn">Register</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

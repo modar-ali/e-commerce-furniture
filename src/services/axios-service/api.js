@@ -1,7 +1,8 @@
 import axios from "axios"
 
 const api = axios.create({
-  baseURL: "https://jamfurniture.000webhostapp.com/",
+  baseURL: "http://localhost:8000/",
+  // baseURL: "https://jamfurniture.000webhostapp.com/",
   // baseURL: "https://asp-enjoyed-bonefish.ngrok-free.app/",
   // headers: {
   //   common: {

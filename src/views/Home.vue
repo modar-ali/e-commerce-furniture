@@ -1,7 +1,9 @@
 <template>
-  <h1>this is the home page</h1>
+  <TabBar />
 </template>
 
-<script setup></script>
+<script setup>
+import TabBar from "@/components/TabBar.vue"
+</script>
 
 <style scoped></style>

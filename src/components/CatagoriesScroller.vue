@@ -4,42 +4,6 @@
       <img :src="getImageUrl(photo.image)" :alt="photo.name" />
       <p class="title">{{ photo.name }}</p>
     </div>
-    <div class="catagories-element">
-      <img src="../assets/images/1714995347.bedromscategory.webp" />
-      <p class="title">Title</p>
-    </div>
-    <div class="catagories-element">
-      <img src="../assets/images/1714995385.diningroomcategory.webp" /> 
-      <p class="title">Title</p>
-    </div>
-    <div class="catagories-element">
-      <img src="../assets/images/1714995417.kitchencategory.webp" /> 
-      <p class="title">Title</p>
-    </div>
-    <div class="catagories-element">
-      <img src="../assets/images/1714995442.outdoorcategory.webp" /> 
-      <p class="title">Title</p>
-    </div>
-    <div class="catagories-element">
-      <img src="../assets/images/1714995466.bathroomcatecory.webp" />
-      <p class="title">Title</p>
-    </div>
-    <div class="catagories-element">
-      <img src="../assets/images/1714995492.livingroomcategory.webp" /> 
-      <p class="title">Title</p>
-    </div>
-    <div class="catagories-element">
-      <img src="../assets/images/1714995543.chilldrensroomcategory.webp" /> 
-      <p class="title">Title</p>
-    </div>
-    <div class="catagories-element">
-      <img src="../assets/images/1714995572.studyroomcategory.webp" /> 
-      <p class="title">Title</p>
-    </div>
-    <div class="catagories-element">
-      <img src="../assets/images/1714995626.hallwaycategory.webp" /> 
-      <p class="title">Title</p>
-    </div>
   </div>
 </template>
 
@@ -51,8 +15,7 @@ import { useStore } from "vuex"
 const store = useStore()
 
 // Define Data :
-const baseURL = ref("https://jamfurniture.000webhostapp.com")
-// const baseURL = ref("https://asp-enjoyed-bonefish.ngrok-free.app")
+const baseURL = ref("http://localhost:8000")
 const photos = computed(() => {
   return store.getters["scroller/getCategoriesPhotos"]
 })

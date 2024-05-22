@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div class="page-center">
+    <div class="container">
     <div class="login-page">
       <div class="register-side">
         <h2>Don't have an account ?<br />Register now</h2>
@@ -41,6 +42,7 @@
         </form>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
