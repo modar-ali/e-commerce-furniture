@@ -1,18 +1,25 @@
 <template>
-  <div class="catagories-scroller snaps-inline">
-    <div class="catagories-element" v-for="photo in photos" :key="photo.id">
+  <div class="categories-scroller snaps-inline">
+    <RouterLink
+      class="categories-element"
+      v-for="photo in photos"
+      :key="photo.id"
+      :to="{ name: 'category-product', params: { id: photo.id } }"
+    >
       <img :src="getImageUrl(photo.image)" :alt="photo.name" />
       <p class="title">{{ photo.name }}</p>
-    </div>
+    </RouterLink>
   </div>
 </template>
 
 <script setup>
 import { computed, onMounted, ref } from "vue"
+import { useRouter } from "vue-router"
 import { useStore } from "vuex"
 
-// Define Store :
+// Define Store & Router :
 const store = useStore()
+const router = useRouter()
 
 // Define Data :
 const baseURL = ref(import.meta.env.VITE_BASE_URL)
@@ -35,7 +42,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.catagories-scroller {
+.categories-scroller {
   --spacer: 0.9375rem;
   --gap: 2.5rem;
   display: grid;
@@ -49,7 +56,7 @@ onMounted(() => {
 }
 
 @media (max-width: 767px) {
-  .catagories-scroller {
+  .categories-scroller {
     --mob-gap: 1.5625rem;
     --mob-spacer: 0.625rem;
     gap: var(--mob-gap);
@@ -59,12 +66,12 @@ onMounted(() => {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .catagories-scroller {
+  .categories-scroller {
     grid-auto-columns: 21%;
   }
 }
 
-.catagories-scroller > * {
+.categories-scroller > * {
   display: grid;
   grid-template-rows: min-content;
   gap: var(--spacer);
@@ -75,7 +82,7 @@ onMounted(() => {
 }
 
 @media (max-width: 767px) {
-  .catagories-scroller > * {
+  .categories-scroller > * {
     gap: var(--mob-spacer);
     padding: var(--mob-spacer);
     background-color: var(--primary-clr-1000);
@@ -91,13 +98,18 @@ onMounted(() => {
   scroll-snap-align: start;
 }
 
-.catagories-element > img {
+.router-link-active {
+  transform: translateY(-15px);
+  transition: 0.3s;
+}
+
+.categories-element > img {
   inline-size: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
-.catagories-element > p {
+.categories-element > p {
   text-align: center;
   font-size: 1.125rem;
   font-weight: var(--fw-bold);
@@ -105,10 +117,10 @@ onMounted(() => {
 }
 
 @media (max-width: 767px) {
-  .catagories-element > img {
+  .categories-element > img {
     border-radius: 50%;
   }
-  .catagories-element > p {
+  .categories-element > p {
     font-size: var(--fs-12px);
   }
 }
