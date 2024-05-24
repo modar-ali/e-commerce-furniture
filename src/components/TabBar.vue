@@ -1,7 +1,5 @@
 <template>
-  <div class="container">
-    <CatagoriesScroller />
-  </div>
+  <CatagoriesScroller />
 </template>
 
 <script setup>

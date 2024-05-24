@@ -7,6 +7,7 @@
   --primary-clr-1000: hsl(0, 0%, 100%);
   --primary-font-clr-1000: hsl(0, 0%, 100%);
   --primary-font-clr-100: hsl(0, 0%, 7%);
+  --opacity-clr-1000: hsla(0, 0%, 100%, 0.75);
   /* end */
 
   --secondary-clr-100: hsl(0, 0%, 7%);
@@ -17,12 +18,11 @@
   --secondary-clr-900: hsl(0, 0%, 95%);
 
   --container-padding: 15px;
-  --section-padding: 10px;
+  --section-padding: 50px;
 
-  --ff: "Roboto", sans-serif;
+  --ff: "Cairo", sans-serif;
 
   --fw-regular: 400;
-  --fw-medium: 500;
   --fw-bold: 700;
   --fw-black: 900;
 

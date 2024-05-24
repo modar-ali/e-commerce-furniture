@@ -1,6 +1,7 @@
 import { createStore } from "vuex"
 import { auth } from "./modules/auth"
 import { scroller } from "./modules/scroller"
+import { trendyProducts } from "./modules/trendyProducts"
 
 const store = createStore({
   state: {
@@ -19,6 +20,7 @@ const store = createStore({
   modules: {
     auth,
     scroller,
+    trendyProducts,
   },
 })
 

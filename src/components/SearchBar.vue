@@ -53,6 +53,8 @@
 .search-input::placeholder,
 .search-icon {
   color: hsla(0, 0%, 0%, 0.25);
+  font-size: 1.125rem;
+  font-weight: var(--fw-bold);
 }
 
 @media (max-width: 767px) {

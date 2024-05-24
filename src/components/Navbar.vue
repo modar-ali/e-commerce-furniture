@@ -6,12 +6,9 @@
         <SearchBar />
       </div>
       <ul class="nav_icons align">
-        <li class="center">
+        <li class="center" v-if="isLoggedIn">
           <span class="icone material-symbols-outlined">shopping_cart</span>
         </li>
-        <!-- <li class="center">
-          <span class="icone material-symbols-outlined">account_circle</span>
-        </li> -->
         <li class="center" v-if="!isLoggedIn">
           <router-link :to="{ name: 'login' }">
             <div class="login align">
@@ -65,6 +62,7 @@ const handleLogout = async () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 25px;
 }
 
 .nav_logo_search {
@@ -127,7 +125,7 @@ const handleLogout = async () => {
   align-items: center;
   color: var(--primary-font-clr-1000);
   background-color: var(--primary-clr-400);
-  padding: 0.3125rem 0.625rem;
+  padding: 0.3125rem 0.75rem;
   border-radius: 1.25rem;
   gap: 0.3125rem;
 }
@@ -135,7 +133,7 @@ const handleLogout = async () => {
 .login span:first-child,
 .logout span:first-child {
   font-size: var(--fs-16px);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-bold);
 }
 
 @media (max-width: 767px) {

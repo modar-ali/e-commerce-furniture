@@ -15,7 +15,7 @@ import { useStore } from "vuex"
 const store = useStore()
 
 // Define Data :
-const baseURL = ref("http://localhost:8000")
+const baseURL = ref(import.meta.env.VITE_BASE_URL)
 const photos = computed(() => {
   return store.getters["scroller/getCategoriesPhotos"]
 })
@@ -37,14 +37,15 @@ onMounted(() => {
 <style scoped>
 .catagories-scroller {
   --spacer: 0.9375rem;
-  --gap: 3.5rem;
+  --gap: 2.5rem;
   display: grid;
   gap: var(--gap);
   grid-auto-flow: column;
-  grid-auto-columns: 14%;
+  grid-auto-columns: 18%;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   padding: var(--spacer) 0;
+  margin-bottom: 50px;
 }
 
 @media (max-width: 767px) {
@@ -69,7 +70,7 @@ onMounted(() => {
   gap: var(--spacer);
   background-color: var(--secondary-clr-900);
   padding: var(--spacer);
-  border-radius: 3px;
+  border-radius: 5px;
   box-shadow: 0 0 5px 0 var(--secondary-clr-900);
 }
 
@@ -98,7 +99,9 @@ onMounted(() => {
 
 .catagories-element > p {
   text-align: center;
+  font-size: 1.125rem;
   font-weight: var(--fw-bold);
+  color: var(--primary-clr-400);
 }
 
 @media (max-width: 767px) {
