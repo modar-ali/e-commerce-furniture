@@ -62,7 +62,7 @@ const handleLogout = async () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .nav_logo_search {

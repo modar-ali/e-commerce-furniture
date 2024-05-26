@@ -2,7 +2,12 @@
   <div class="trendy-products">
     <h2 class="section-title">Trendy Products</h2>
     <div class="products-grid">
-      <div class="product" v-for="product of products" :key="product.id">
+      <RouterLink
+        :to="{ name: 'product', params: { id: product.id } }"
+        class="product"
+        v-for="product of products"
+        :key="product.id"
+      >
         <img
           class="product__img"
           :src="getImageUrl(product.image)"
@@ -12,7 +17,7 @@
           <h3 class="product__title">{{ product.name }}</h3>
           <p class="product__price">{{ product.price - product.discount }}</p>
         </div>
-      </div>
+      </RouterLink>
     </div>
     <div class="navigation-arrows">
       <span
@@ -43,9 +48,7 @@ const products = computed(() => {
   return store.getters["productsPagination/getProducts"]
 })
 const currentPage = ref(store.getters["productsPagination/getCurrentPage"])
-const lastPage = computed(() => {
-  return store.getters["productsPagination/getLastPage"]
-})
+
 const hasMorePages = computed(() => {
   return store.getters["productsPagination/hasMorePages"]
 })

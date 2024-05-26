@@ -40,7 +40,6 @@ export const productsPagination = {
     getProducts: (state) => state.products,
     getCategoryName: (state) => state.category,
     getCurrentPage: (state) => state.currentPage,
-    getLastPage: (state) => state.lastPage,
     hasMorePages: (state) => state.hasMorePages,
   },
 }
