@@ -1,7 +1,13 @@
 <template>
   <div class="trendy-products">
     <h2 class="section-title">Trendy Products</h2>
-    <div class="products-grid">
+    <TransitionGroup
+      tag="div"
+      class="products-grid"
+      appear
+      @before-enter="onBeforeEnter"
+      @enter="onEnter"
+    >
       <RouterLink
         :to="{ name: 'product', params: { id: product.id } }"
         class="product"
@@ -18,7 +24,7 @@
           <p class="product__price">{{ product.price - product.discount }}</p>
         </div>
       </RouterLink>
-    </div>
+    </TransitionGroup>
     <div class="navigation-arrows">
       <span
         @click="previousPage"
@@ -39,6 +45,7 @@
 <script setup>
 import { computed, ref, watchEffect } from "vue"
 import { useStore } from "vuex"
+import gsap from "gsap"
 
 // Define Store :
 const store = useStore()
@@ -85,6 +92,19 @@ watchEffect(async () => {
     `api/product/trendy?page=${currentPage.value}`
   )
 })
+
+const onBeforeEnter = (el) => {
+  el.style.opacity = 0
+  el.style.transform = "translateX(100px)"
+}
+
+const onEnter = (el) => {
+  gsap.to(el, {
+    x: 0,
+    opacity: 1,
+    duration: 0.5,
+  })
+}
 </script>
 
 <style scoped>

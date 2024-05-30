@@ -1,48 +1,52 @@
 <template>
   <div class="page-center">
     <div class="container">
-    <div class="login-page">
-      <div class="register-side">
-        <h2>Don't have an account ?<br />Register now</h2>
-        <p>Register or Login to know more<br />about our products.</p>
-        <button @click="handleClick" class="register-btn">
-          Create account
-        </button>
-      </div>
-      <div class="login-side">
-        <form @submit.prevent="handleLogin" class="login-form">
-          <div class="field">
-            <input type="text" placeholder="Email" v-model="loginData.email" />
-            <span class="errMsg"></span>
-          </div>
-          <div class="feild">
-            <div class="password">
+      <div class="login-page">
+        <div class="register-side">
+          <h2>Don't have an account ?<br />Register now</h2>
+          <p>Register or Login to know more<br />about our products.</p>
+          <button @click="handleClick" class="register-btn">
+            Create account
+          </button>
+        </div>
+        <div class="login-side">
+          <form @submit.prevent="handleLogin" class="login-form">
+            <div class="field">
               <input
-                :type="passwordVisible ? 'text' : 'password'"
-                placeholder="Password"
-                v-model="loginData.password"
+                type="text"
+                placeholder="Email"
+                v-model="loginData.email"
               />
-              <span
-                @click="toggleVisible"
-                v-if="!passwordVisible"
-                class="toggle material-symbols-outlined"
-                >visibility</span
-              >
-              <span
-                @click="toggleVisible"
-                v-if="passwordVisible"
-                class="toggle material-symbols-outlined"
-              >
-                visibility_off
-              </span>
+              <span class="errMsg"></span>
             </div>
-            <span class="errMsg"></span>
-          </div>
-          <button class="submit-login-btn">Login</button>
-        </form>
+            <div class="feild">
+              <div class="password">
+                <input
+                  :type="passwordVisible ? 'text' : 'password'"
+                  placeholder="Password"
+                  v-model="loginData.password"
+                />
+                <span
+                  @click="toggleVisible"
+                  v-if="!passwordVisible"
+                  class="toggle material-symbols-outlined"
+                  >visibility</span
+                >
+                <span
+                  @click="toggleVisible"
+                  v-if="passwordVisible"
+                  class="toggle material-symbols-outlined"
+                >
+                  visibility_off
+                </span>
+              </div>
+              <span class="errMsg"></span>
+            </div>
+            <button class="submit-login-btn">Login</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 

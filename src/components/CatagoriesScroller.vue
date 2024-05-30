@@ -79,6 +79,7 @@ onMounted(() => {
   padding: var(--spacer);
   border-radius: 5px;
   box-shadow: 0 0 5px 0 var(--secondary-clr-900);
+  transition:  0.3s;
 }
 
 @media (max-width: 767px) {
@@ -100,7 +101,6 @@ onMounted(() => {
 
 .router-link-active {
   transform: translateY(-15px);
-  transition: 0.3s;
 }
 
 .categories-element > img {
