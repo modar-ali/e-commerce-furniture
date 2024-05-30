@@ -1,13 +1,32 @@
 <template>
-  <form>
+  <form @submit.prevent="search">
     <div class="search align">
       <span class="search-icon material-symbols-outlined">search</span>
-      <input class="search-input" type="search" placeholder="Search..." />
+      <input
+        class="search-input"
+        type="search"
+        v-model="searchedData"
+        placeholder="Search..."
+      />
     </div>
   </form>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue"
+import { useRouter } from "vue-router"
+
+// Define Router :
+const router = useRouter()
+
+// Define Data :
+const searchedData = ref("")
+
+// Define Methods :
+const search = () => {
+  router.push({ name: "searched-products", params: { name: searchedData.value } })
+}
+</script>
 
 <style scoped>
 .align {

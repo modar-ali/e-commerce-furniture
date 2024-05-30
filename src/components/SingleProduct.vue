@@ -112,7 +112,7 @@ onMounted(() => {
 .single-product__title {
   font-size: 1.5rem;
   color: var(--primary-clr-400);
-  line-height: 1.1;
+  line-height: 1;
 }
 
 @media (min-width: 767px) {
