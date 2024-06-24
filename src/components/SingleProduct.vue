@@ -1,6 +1,33 @@
 <template>
-  <div class="container">
-    <div class="page-center">
+  <div class="page-center">
+    <div class="status-pop-up" v-if="addToCartRes.status === 'success'">
+      <div class="pop-up-info">
+        <div class="check-icon">
+          <span class="material-symbols-outlined">check</span>
+        </div>
+        <p class="status-text">{{ addToCartRes.message }}</p>
+      </div>
+      <span class="close-icon" @click="addToCartRes.status = ''">close</span>
+    </div>
+    <div
+      class="status-pop-up"
+      v-if="addToCartErr"
+      :class="{ error: addToCartErr }"
+    >
+      <div class="pop-up-info">
+        <div class="error-icon">
+          <span class="material-symbols-outlined">error</span>
+        </div>
+        <p class="status-text">Oop's, you should login first</p>
+      </div>
+      <span
+        class="close-icon"
+        @click="closePopup($event)"
+        :class="{ 'close-error': addToCartErr }"
+        >close</span
+      >
+    </div>
+    <div class="container">
       <div class="single-product" :class="{ trendy: product.is_trendy }">
         <img
           class="single-product__img"
@@ -21,9 +48,19 @@
               {{ Math.trunc(product.price) }}
             </div>
           </div>
-          <span class="single-product__amount"
-            >{{ product.amount }} pieces</span
-          >
+          <div class="pieces-and-cart">
+            <button
+              class="add-to-cart"
+              @click="addToCart"
+              :disabled="addToCartRes.status === 'success'"
+              :class="{ 'not-allowed': addToCartRes.status === 'success' }"
+            >
+              Add to Cart
+            </button>
+            <span class="single-product__amount"
+              >{{ product.amount }} pieces</span
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -44,6 +81,14 @@ const product = computed(() => {
   return store.getters["showProduct/getProduct"]
 })
 
+const addToCartRes = computed(() => {
+  return store.getters["cartManagement/getAddResponse"]
+})
+
+const addToCartErr = computed(() => {
+  return store.getters["cartManagement/getAddErrorMsg"]
+})
+
 const baseURL = ref(import.meta.env.VITE_BASE_URL)
 
 // Define Methods :
@@ -54,8 +99,17 @@ const fetchProduct = () => {
   )
 }
 
+const addToCart = () => {
+  store.dispatch("cartManagement/addToCart", { product_id: product.value.id })
+  store.dispatch("cartManagement/fetchUserCart")
+}
+
 const getImageUrl = (imagePath) => {
   return `${baseURL.value}${imagePath}`
+}
+
+const closePopup = (e) => {
+  e.target.parentElement.remove()
 }
 
 onMounted(() => {
@@ -64,6 +118,70 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.status-pop-up {
+  display: grid;
+  gap: 0.3125rem;
+  background-color: var(--primary-clr-1000);
+  box-shadow: 0 0 10px 0px var(--primary-clr-400);
+  padding: 0.625rem;
+  border-radius: 0.3125rem;
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pop-up-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+}
+
+.error {
+  box-shadow: 0 0 10px 0px hsl(0, 92%, 66%);
+}
+
+.check-icon,
+.error-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--primary-clr-400);
+}
+
+.error-icon {
+  background-color: hsl(0, 92%, 66%);
+}
+
+.check-icon > *,
+.error-icon > * {
+  color: var(--primary-clr-1000);
+}
+
+.status-text {
+  font-size: 1.125rem;
+  font-weight: var(--fw-bold);
+}
+
+.close-icon {
+  cursor: pointer;
+  background-color: var(--primary-clr-400);
+  color: var(--primary-clr-1000);
+  display: block;
+  width: fit-content;
+  padding-inline: 0.625rem;
+  margin-inline: auto;
+  border-radius: 1.25rem;
+  font-weight: var(--fw-bold);
+}
+
+.close-error {
+  background-color: hsl(0, 92%, 66%);
+}
+
 .single-product {
   --content-padding: 0.9375rem;
   --content-spacing: 0.3125rem;
@@ -76,6 +194,12 @@ onMounted(() => {
   .single-product {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.single-product__img {
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .trendy {
@@ -193,13 +317,35 @@ onMounted(() => {
   transform: translateY(-50%);
 }
 
+.pieces-and-cart {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.add-to-cart {
+  cursor: pointer;
+  font-weight: var(--fw-bold);
+  background-color: var(--primary-clr-400);
+  color: var(--primary-clr-1000);
+  padding: 0.3125rem 0.625rem;
+  border: none;
+  border-radius: 1rem;
+}
+
 .single-product__amount {
-  margin-left: auto;
   width: fit-content;
   padding: 0.3125rem 0.625rem;
   border-radius: 1.25rem;
   font-weight: var(--fw-bold);
   background-color: var(--primary-clr-400);
   color: var(--primary-clr-1000);
+}
+
+.not-allowed {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 </style>

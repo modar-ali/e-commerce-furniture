@@ -4,6 +4,7 @@ import { scroller } from "./modules/scroller"
 import { productsPagination } from "./modules/productsPagination"
 import { showProduct } from "./modules/showProduct"
 import { searchedProducts } from "./modules/searchedProducts"
+import { cartManagement } from "./modules/cartManagement"
 
 const store = createStore({
   state: {
@@ -25,6 +26,7 @@ const store = createStore({
     productsPagination,
     showProduct,
     searchedProducts,
+    cartManagement,
   },
 })
 

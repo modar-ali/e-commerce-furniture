@@ -7,15 +7,21 @@
       </div>
       <ul class="nav_icons align">
         <li class="center" v-if="isLoggedIn">
-          <span class="icone material-symbols-outlined">shopping_cart</span>
+          <RouterLink class="cart" :to="{ name: 'cart' }">
+            <span
+              :class="{ 'existing-itmes': cartItems.items }"
+              class="icone material-symbols-outlined"
+              >shopping_cart</span
+            >
+          </RouterLink>
         </li>
         <li class="center" v-if="!isLoggedIn">
-          <router-link :to="{ name: 'login' }">
+          <RouterLink :to="{ name: 'login' }">
             <div class="login align">
               <span>Login</span>
               <span class="material-symbols-outlined">login</span>
             </div>
-          </router-link>
+          </RouterLink>
         </li>
         <li class="align" @click="handleLogout" v-if="isLoggedIn">
           <div class="logout">
@@ -30,21 +36,36 @@
 
 <script setup>
 import SearchBar from "./SearchBar.vue"
-import { computed } from "vue"
+import { computed, onMounted } from "vue"
 import { useStore } from "vuex"
 import { useRouter } from "vue-router"
 
+// Define Store & Router :
 const store = useStore()
 const router = useRouter()
 
+// Define Data :
 const isLoggedIn = computed(() => {
   return store.getters["auth/isLoggedIn"]
 })
 
+const cartItems = computed(() => {
+  return store.getters["cartManagement/getUserCart"]
+})
+
+// Define Methods :
 const handleLogout = async () => {
   await store.dispatch("auth/logout")
   router.push({ name: "login" })
 }
+
+const fetchUserCart = () => {
+  store.dispatch("cartManagement/fetchUserCart")
+}
+
+onMounted(() => {
+  fetchUserCart()
+})
 </script>
 
 <style scoped>
@@ -90,6 +111,27 @@ const handleLogout = async () => {
 .nav_icons {
   flex-basis: auto;
   justify-content: flex-end;
+}
+
+a.cart {
+  display: grid;
+  place-items: center;
+}
+
+.existing-itmes {
+  position: relative;
+}
+
+.existing-itmes::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: hsl(0, 92%, 66%);
+  border: 2px solid var(--primary-font-clr-1000);
+  border-radius: 50%;
 }
 
 .nav_icons > * {
