@@ -70,24 +70,29 @@
             Save Changes
           </button>
         </div>
-        <div class="item__right-side">
-          <span
-            @click="removeFromCart(item.product_id)"
-            class="delete-icon material-symbols-outlined"
-            >delete</span
-          >
+        <div class="item__right-side" @click="removeFromCart(item.product_id)">
+          <span class="delete-icon material-symbols-outlined">delete</span>
+          <p class="delete-text">Remove</p>
         </div>
       </div>
+      <div class="total-price" v-if="!userCart.message">
+        Total Price : {{ userCart.total_price }} SYP
+      </div>
+      <button class="checkout" @click="moveToCheckout" v-if="!userCart.message">
+        Continue to checkout
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from "vue"
+import { useRouter } from "vue-router"
 import { useStore } from "vuex"
 
-// Define Store :
+// Define Store & Router :
 const store = useStore()
+const router = useRouter()
 
 // Define Data :
 const userCart = computed(() => {
@@ -127,6 +132,10 @@ const updateCart = (productId, quantity) => {
 
 const getImageUrl = (imagePath) => {
   return `${baseURL.value}${imagePath}`
+}
+
+const moveToCheckout = () => {
+  router.push({ name: "checkout" })
 }
 
 onMounted(() => {
@@ -206,13 +215,17 @@ onMounted(() => {
 
 .all-items {
   display: grid;
-  gap: 0.625rem;
+  gap: 1.875rem;
+}
+
+.item:first-child {
+  padding-top: 1.875rem;
 }
 
 .item {
   background-color: var(--primary-clr-1000);
-  border: 1px solid var(--secondary-clr-700);
-  padding: 0.3125rem;
+  border-bottom: 2px solid var(--secondary-clr-900);
+  padding-bottom: 1.875rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -221,25 +234,25 @@ onMounted(() => {
 .item__left-side {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: 1.25rem;
 }
 
 .item__img {
-  width: 100px;
+  width: 150px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
 .item__info {
   display: grid;
-  gap: 0.3125rem;
+  gap: 1.25rem;
 }
 
 .item__name {
   width: 20ch;
   position: relative;
   font-weight: bold;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   color: var(--primary-font-clr-100);
   transition: 0.3s;
 }
@@ -250,6 +263,7 @@ onMounted(() => {
 
 .item__quantity,
 .item__price {
+  font-size: 1rem;
   color: var(--primary-clr-400);
   font-weight: var(--fw-bold);
 }
@@ -257,13 +271,13 @@ onMounted(() => {
 .item__middle-side {
   display: grid;
   align-items: center;
-  gap: 0.3125rem;
+  gap: 0.625rem;
 }
 
 .manage-update {
   display: flex;
   align-items: center;
-  gap: 0.3125rem;
+  gap: 0.625rem;
 }
 
 .increase-button,
@@ -293,6 +307,7 @@ onMounted(() => {
 }
 
 .save-update {
+  font-size: 1rem;
   font-weight: var(--fw-bold);
   background-color: var(--primary-clr-400);
   color: var(--primary-clr-1000);
@@ -301,12 +316,24 @@ onMounted(() => {
   border-radius: 1.25rem;
 }
 
-.delete-icon {
+.item__right-side {
   cursor: pointer;
-  color: var(--primary-font-clr-1000);
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
   background-color: var(--primary-clr-400);
-  padding: 0.3125rem;
-  border-radius: 50%;
+  padding: 0.3125rem 0.625rem;
+  border-radius: 1.25rem;
+}
+
+.delete-icon {
+  color: var(--primary-font-clr-1000);
+}
+
+.delete-text {
+  color: var(--primary-clr-1000);
+  font-weight: var(--fw-bold);
+  font-size: 1rem;
 }
 
 .no-items {
@@ -326,5 +353,26 @@ onMounted(() => {
 
 .no-items__text {
   color: var(--secondary-clr-500);
+}
+
+.total-price {
+  margin-inline: auto;
+  font-size: 1.5rem;
+  font-weight: var(--fw-bold);
+  color: var(--primary-font-clr-100);
+}
+
+.checkout {
+  cursor: pointer;
+  width: 25%;
+  margin-inline: auto;
+  padding-block: 0.625rem;
+  font-size: 1.25rem;
+  font-weight: var(--fw-bold);
+  border: none;
+  border-radius: 2rem;
+  background-color: var(--primary-clr-400);
+  color: var(--primary-clr-1000);
+  margin-bottom: 1.875rem;
 }
 </style>

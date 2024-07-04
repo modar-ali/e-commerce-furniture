@@ -5,6 +5,7 @@ import { productsPagination } from "./modules/productsPagination"
 import { showProduct } from "./modules/showProduct"
 import { searchedProducts } from "./modules/searchedProducts"
 import { cartManagement } from "./modules/cartManagement"
+import { locations } from "./modules/locations"
 
 const store = createStore({
   state: {
@@ -27,6 +28,7 @@ const store = createStore({
     showProduct,
     searchedProducts,
     cartManagement,
+    locations,
   },
 })
 
