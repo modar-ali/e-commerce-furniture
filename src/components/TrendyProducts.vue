@@ -107,8 +107,4 @@ const onEnter = (el) => {
 }
 </script>
 
-<style scoped>
-.trendy-products {
-  margin-bottom: 50px;
-}
-</style>
+<style scoped></style>

@@ -2,7 +2,11 @@
   <div class="container">
     <div class="nav">
       <div class="nav_logo_search align">
-        <div class="logo center">Logo</div>
+        <div class="logo center">
+          <RouterLink :to="{ name: 'home' }">
+            <img src="../assets/images/JAM-Furniture-Logo.png" alt="Logo" />
+          </RouterLink>
+        </div>
         <SearchBar />
       </div>
       <ul class="nav_icons align">
@@ -98,10 +102,11 @@ onMounted(() => {
 }
 
 .logo {
-  color: var(--primary-clr-400);
-  font-size: var(--fs-20px);
-  font-weight: var(--fw-bold);
   min-height: 70px;
+}
+
+.logo img {
+  width: 70px;
 }
 
 .nav_logo_search > form {

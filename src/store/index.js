@@ -6,6 +6,7 @@ import { showProduct } from "./modules/showProduct"
 import { searchedProducts } from "./modules/searchedProducts"
 import { cartManagement } from "./modules/cartManagement"
 import { locations } from "./modules/locations"
+import { orders } from "./modules/orders"
 
 const store = createStore({
   state: {
@@ -29,6 +30,7 @@ const store = createStore({
     searchedProducts,
     cartManagement,
     locations,
+    orders,
   },
 })
 

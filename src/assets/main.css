@@ -2,6 +2,7 @@
 
 :root {
   --primary-clr-400: hsl(215, 66%, 36%);
+  --primary-opacity-clr-400: hsl(215, 66%, 75%);
 
   /* for background */
   --primary-clr-1000: hsl(0, 0%, 100%);

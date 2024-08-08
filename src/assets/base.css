@@ -274,7 +274,7 @@ body {
 }
 
 .navigation-arrows {
-  margin-top: 25px;
+  margin-top: 50px;
   display: flex;
   justify-content: space-around;
 }
@@ -284,7 +284,7 @@ body {
   padding: 0.3125rem;
   font-size: 30px;
   font-weight: var(--fw-bold);
-  border-radius: 50%;
+  border-radius: 0.3125rem;
   background-color: var(--primary-clr-400);
   color: var(--primary-clr-1000);
 }

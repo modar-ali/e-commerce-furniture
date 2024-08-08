@@ -1,100 +1,114 @@
 <template>
+  <Popup
+    v-if="makePaymentRes.status === 'success'"
+    :popup-msg="makePaymentRes.message"
+  />
   <div class="form-overlay">
-    <div class="update-location">
+    <div class="make-payment">
       <span @click="$emit('close')" class="close-icon material-symbols-outlined"
         >close</span
       >
-      <h2 class="form-title">Edit Form</h2>
-      <form class="update-form" @submit.prevent="updateLocation">
-        <div class="location__city">
-          <input type="text" placeholder="City *" v-model="location.city" />
-          <span
-            class="errMsg"
-            v-for="error in v$.city.$errors"
-            :key="error.$uid"
-          >
-            {{ error.$message }}</span
-          >
-        </div>
-        <div class="location__street">
-          <input type="text" placeholder="Street *" v-model="location.street" />
-          <span
-            class="errMsg"
-            v-for="error in v$.street.$errors"
-            :key="error.$uid"
-          >
-            {{ error.$message }}</span
-          >
-        </div>
-        <div class="location__building">
+      <h2 class="form-title">Make Payment</h2>
+      <form class="payment-form" @submit.prevent="makePayment">
+        <div class="phone-number">
           <input
             type="text"
-            placeholder="Building *"
-            v-model="location.building"
+            placeholder="phone number *"
+            v-model="paymentData.phoneNumber"
           />
           <span
             class="errMsg"
-            v-for="error in v$.building.$errors"
+            v-for="error in v$.phoneNumber.$errors"
             :key="error.$uid"
           >
             {{ error.$message }}</span
           >
         </div>
-        <button class="save-location">Save</button>
+        <div class="process-number">
+          <input
+            type="text"
+            placeholder="process number *"
+            v-model="paymentData.processNumber"
+          />
+          <span
+            class="errMsg"
+            v-for="error in v$.processNumber.$errors"
+            :key="error.$uid"
+          >
+            {{ error.$message }}</span
+          >
+        </div>
+        <button class="make-payment-btn">Make payment</button>
       </form>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
 import useVuelidate from "@vuelidate/core"
 import { required } from "@vuelidate/validators"
+import { computed, ref } from "vue"
 import { useStore } from "vuex"
+import Popup from "./Popup.vue"
 
-// Define Store & Props & Emit :
+// Define Store :
 const store = useStore()
-const props = defineProps({
-  locationId: Number,
-})
-const emit = defineEmits("close")
 
 // Define Data :
-const location = ref({
-  city: "",
-  street: "",
-  building: "",
+const props = defineProps({
+  orderId: Number,
+})
+
+const emit = defineEmits(["close"])
+
+const paymentData = ref({
+  phoneNumber: null,
+  processNumber: null,
 })
 
 const rules = computed(() => {
   return {
-    city: { required },
-    street: { required },
-    building: { required },
+    phoneNumber: { required },
+    processNumber: { required },
   }
 })
 
-const v$ = useVuelidate(rules, location)
+const v$ = useVuelidate(rules, paymentData)
 
+const makePaymentRes = computed(() => {
+  return store.getters["orders/getMakePaymentRes"]
+})
 // Define Methods :
-const fetchUserLocations = async () => {
-  await store.dispatch("locations/fetchUserLocations")
+const fetchUserOrders = () => {
+  store.dispatch("orders/fetchUserOrders")
 }
 
-const updateLocation = async () => {
+const makePayment = async () => {
   let isFormValid = await v$.value.$validate()
   if (isFormValid) {
-    await store.dispatch("locations/updateLocation", {
-      location: location.value,
-      locationId: props.locationId,
+    await store.dispatch("orders/makePayment", {
+      orderId: props.orderId,
+      phoneNumber: paymentData.value.phoneNumber,
+      processNumber: paymentData.value.processNumber,
     })
     emit("close")
   }
-  fetchUserLocations()
+  fetchUserOrders()
 }
 </script>
 
 <style scoped>
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
 .form-overlay {
   display: grid;
   place-items: center;
@@ -104,7 +118,7 @@ const updateLocation = async () => {
   background-color: hsla(0, 0%, 100%, 0.9);
 }
 
-.update-location {
+.make-payment {
   position: relative;
   display: grid;
   gap: 0.625rem;
@@ -130,14 +144,13 @@ const updateLocation = async () => {
   background-color: var(--secondary-clr-900);
 }
 
-.update-form {
+.payment-form {
   display: grid;
   gap: 0.625rem;
 }
 
-.location__city > input,
-.location__street > input,
-.location__building > input {
+.phone-number > input,
+.process-number > input {
   width: 100%;
   padding: 0.625rem 0;
   border: none;
@@ -153,7 +166,7 @@ const updateLocation = async () => {
   font-weight: var(--fw-bold);
 }
 
-.save-location {
+.make-payment-btn {
   cursor: pointer;
   background-color: var(--primary-clr-400);
   color: var(--primary-font-clr-1000);

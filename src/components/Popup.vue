@@ -27,7 +27,7 @@ onMounted(() => {
 
 <style scoped>
 .status-popup {
-  width: 200px;
+  width: fit-content;
   background-color: var(--secondary-clr-100);
   color: var(--primary-clr-1000);
   position: fixed;
@@ -36,7 +36,7 @@ onMounted(() => {
   right: 2.5%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.625rem;
   padding: 1.25rem;
   border-radius: 0.3125rem;
 }

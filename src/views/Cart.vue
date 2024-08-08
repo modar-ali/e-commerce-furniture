@@ -1,28 +1,10 @@
 <template>
   <div class="container">
-    <div class="status-pop-up" v-if="updateRespons.status === 'success'">
-      <div class="pop-up-info">
-        <div class="check-icon">
-          <span class="material-symbols-outlined">check</span>
-        </div>
-        <p class="status-text">{{ updateRespons.message }}</p>
-      </div>
-      <span class="close-icon" @click="updateRespons.status = ''">close</span>
-    </div>
-    <div class="status-pop-up" v-if="showDialog" :class="{ error: showDialog }">
-      <div class="pop-up-info">
-        <div class="error-icon">
-          <span class="material-symbols-outlined">error</span>
-        </div>
-        <p class="status-text">Wrong quantity . !</p>
-      </div>
-      <span
-        class="close-icon"
-        :class="{ 'close-error': showDialog }"
-        @click="showDialog = false"
-        >close</span
-      >
-    </div>
+    <Popup
+      v-if="updateRespons.status === 'success'"
+      :popup-msg="updateRespons.message"
+    />
+    <Popup v-if="showDialog" :popup-msg="'Wrong quantity !!!'" />
     <div class="all-items">
       <div class="no-items" v-if="userCart.message">
         <img
@@ -89,6 +71,7 @@
 import { ref, computed, onMounted } from "vue"
 import { useRouter } from "vue-router"
 import { useStore } from "vuex"
+import Popup from "@/components/Popup.vue"
 
 // Define Store & Router :
 const store = useStore()
@@ -146,71 +129,7 @@ onMounted(() => {
 <style scoped>
 .container {
   position: relative;
-  height: calc(100vh - 80px);
-}
-
-.status-pop-up {
-  display: grid;
-  gap: 0.3125rem;
-  background-color: var(--primary-clr-1000);
-  box-shadow: 0 0 10px 0px var(--primary-clr-400);
-  padding: 0.625rem;
-  border-radius: 0.3125rem;
-  position: fixed;
-  z-index: 100;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.pop-up-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-}
-
-.error {
-  box-shadow: 0 0 10px 0px hsl(0, 92%, 66%);
-}
-
-.check-icon,
-.error-icon {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: var(--primary-clr-400);
-}
-
-.error-icon {
-  background-color: hsl(0, 92%, 66%);
-}
-
-.check-icon > *,
-.error-icon > * {
-  color: var(--primary-clr-1000);
-}
-
-.status-text {
-  font-size: 1.125rem;
-  font-weight: var(--fw-bold);
-}
-
-.close-icon {
-  cursor: pointer;
-  background-color: var(--primary-clr-400);
-  color: var(--primary-clr-1000);
-  display: block;
-  width: fit-content;
-  padding-inline: 0.625rem;
-  margin-inline: auto;
-  border-radius: 1.25rem;
-  font-weight: var(--fw-bold);
-}
-
-.close-error {
-  background-color: hsl(0, 92%, 66%);
+  min-height: calc(100vh - 80px);
 }
 
 .all-items {
