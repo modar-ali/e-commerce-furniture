@@ -1,5 +1,3 @@
-
-
 import axios from "axios"
 
 const api = axios.create({
@@ -12,4 +10,3 @@ if (token) {
 }
 
 export default api
-

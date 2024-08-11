@@ -13,8 +13,8 @@ export const auth = {
       state.user = info.user
       state.token = info.token
     },
-    authError: (state) => {
-      state.status = "error"
+    authError: (state, error) => {
+      state.status = error
     },
     logout: (state) => {
       state.status = ""
@@ -34,7 +34,7 @@ export const auth = {
         api.defaults.headers.common["Authorization"] = `Bearer ${token}`
         context.commit("setIsLoading", false, { root: true })
       } catch (error) {
-        context.commit("authError")
+        context.commit("authError", error.message)
         localStorage.removeItem("accessToken")
       }
     },

@@ -201,6 +201,7 @@ onMounted(() => {
 
 .increase-button,
 .decrease-button {
+  cursor: pointer;
   display: grid;
   place-items: center;
   border: none;
@@ -226,6 +227,7 @@ onMounted(() => {
 }
 
 .save-update {
+  cursor: pointer;
   font-size: 1rem;
   font-weight: var(--fw-bold);
   background-color: var(--primary-clr-400);

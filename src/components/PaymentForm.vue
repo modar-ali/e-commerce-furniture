@@ -9,6 +9,24 @@
         >close</span
       >
       <h2 class="form-title">Make Payment</h2>
+      <div class="phone-num-to-pay">
+        <div class="syriatel">
+          <img
+            class="syriatel-logo"
+            src="../assets/images/pngwing.com.png"
+            alt="syriatel logo"
+          />
+          <p class="syriatel-number">+963 982156405</p>
+        </div>
+        <div class="mtn">
+          <img
+            class="mtn-logo"
+            src="../assets/images/MTN Icon Logo Vector.png"
+            alt="mtn logo"
+          />
+          <p class="mtn-number">+963 951678483</p>
+        </div>
+      </div>
       <form class="payment-form" @submit.prevent="makePayment">
         <div class="phone-number">
           <input
@@ -115,6 +133,7 @@ input[type="number"] {
   height: calc(100vh - 70px);
   width: 100%;
   position: fixed;
+  z-index: 100;
   background-color: hsla(0, 0%, 100%, 0.9);
 }
 
@@ -142,6 +161,31 @@ input[type="number"] {
 
 .close-icon:hover {
   background-color: var(--secondary-clr-900);
+}
+
+.phone-num-to-pay {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.syriatel,
+.mtn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  align-items: center;
+}
+
+.syriatel-logo,
+.mtn-logo {
+  width: 100px;
+}
+
+.syriatel-number,
+.mtn-number {
+  font-size: 13px;
+  font-weight: var(--fw-bold);
 }
 
 .payment-form {
